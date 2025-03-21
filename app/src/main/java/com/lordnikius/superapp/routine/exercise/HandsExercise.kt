@@ -6,6 +6,7 @@ import com.lordnikius.superapp.routine.exercise.step.StretchStep
 import com.lordnikius.superapp.util.BeepToneManager
 import com.lordnikius.superapp.util.TextToSpeechManager
 import com.lordnikius.superapp.R
+import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class HandsExercise @Inject constructor(
@@ -13,7 +14,7 @@ class HandsExercise @Inject constructor(
     textToSpeechManager: TextToSpeechManager,
 ): StretchingExercise(
     nameRes = R.string.hands,
-    steps = listOf(
+    steps = flowOf(
         PreparationStep("Hands", PREPARATION_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         RelaxStep(textToSpeechManager, beepToneManager),

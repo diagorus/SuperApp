@@ -7,6 +7,7 @@ import com.lordnikius.superapp.routine.exercise.step.StretchStep
 import com.lordnikius.superapp.util.BeepToneManager
 import com.lordnikius.superapp.util.TextToSpeechManager
 import com.lordnikius.superapp.R
+import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class ButtAndBackExercise @Inject constructor(
@@ -14,7 +15,7 @@ class ButtAndBackExercise @Inject constructor(
     textToSpeechManager: TextToSpeechManager,
 ) : StretchingExercise(
     nameRes = R.string.butt_and_back,
-    steps = listOf(
+    steps = flowOf(
         PreparationStep("Butt and back", PREPARATION_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         ChangeStep(textToSpeechManager),

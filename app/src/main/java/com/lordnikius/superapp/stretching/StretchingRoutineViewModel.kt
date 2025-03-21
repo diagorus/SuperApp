@@ -8,6 +8,8 @@ import com.lordnikius.superapp.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.concatMap
+import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -22,35 +24,16 @@ class StretchingRoutineViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(StretchingRoutineUiState())
     val uiState = _uiState.asStateFlow()
 
-    init {
-        routine.currentExercise
+    fun onStartClick() {
+        routine.exercises
             .onEach { exercise ->
-                exercise.currentStep
-                    .onEach { step ->
-                        _uiState.update {
-                            val stepNameRes = step?.nameRes
-                            val stepName = stepNameRes?.let {
-                                StringUiData.Argument.StringResource(step.nameRes)
-                            } ?: StringUiData.Argument.StringValue("")
-                            it.copy(
-                                exerciseAndStep = StringUiData.Resource(
-                                    id = R.string.hyphen_divider,
-                                    arguments = arrayOf(
-                                        StringUiData.Argument.StringResource(exercise.nameRes),
-                                        stepName,
-                                    )
-                                ),
-                            )
-                        }
-                    }
-                    .launchIn(viewModelScope)
+                _uiState.update { it.copy(exercise = StringUiData.Resource(id = exercise.nameRes)) }
+            }
+            .flatMapConcat { it.steps }
+            .onEach { step ->
+                _uiState.update { it.copy(step = StringUiData.Resource(id = step.nameRes)) }
+                step.step()
             }
             .launchIn(viewModelScope)
-    }
-
-    fun onStartClick() {
-        viewModelScope.launch {
-            routine.start()
-        }
     }
 }

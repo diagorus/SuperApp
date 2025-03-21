@@ -9,6 +9,7 @@ import com.lordnikius.superapp.routine.exercise.TransverseTwineExercise
 import com.lordnikius.superapp.routine.exercise.HandsExercise
 import com.lordnikius.superapp.routine.exercise.RoutineEndExercise
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
+import kotlin.coroutines.coroutineContext
 
 class Routine @Inject constructor(
     handsExercise: HandsExercise,
@@ -29,7 +31,7 @@ class Routine @Inject constructor(
     routineEndExercise: RoutineEndExercise
 ) {
 
-    private val exercises = flowOf(
+    val exercises = flowOf(
         handsExercise,
         backTwistsExercise,
         longitudinalTwineExercise,
@@ -38,12 +40,4 @@ class Routine @Inject constructor(
         buttAndBackExercise,
         routineEndExercise,
     )
-
-    val currentExercise: SharedFlow<StretchingExercise> = exercises.shareIn(GlobalScope, SharingStarted.Lazily)
-
-    suspend fun start() {
-        exercises.collect {
-            it.start()
-        }
-    }
 }

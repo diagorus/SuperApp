@@ -2,6 +2,7 @@ package com.lordnikius.superapp.stretching
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -61,11 +62,13 @@ fun StretchingRoutineScreen(
                     Text(text = stringResource(id = R.string.start))
                 }
 
-                //todo dimens from theme
-                Text(
+                Row(
                     modifier = Modifier.padding(top = 16.dp),
-                    text = uiState.exerciseAndStep.transformToString(),
-                )
+                ) {
+                    Text(text = uiState.exercise.transformToString())
+                    Text(" - ")
+                    Text(text = uiState.step.transformToString())
+                }
             }
         }
     }
@@ -77,7 +80,8 @@ private fun StretchingRoutineScreenPreview0() {
     MaterialTheme {
         StretchingRoutineScreen(
             StretchingRoutineUiState(
-                exerciseAndStep = StringUiData.Value("Hands - Preparation"),
+                exercise = StringUiData.Value("Hands"),
+                step = StringUiData.Value("Preparation"),
             ),
             onStartClick = {},
         )

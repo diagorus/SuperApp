@@ -6,6 +6,7 @@ import com.lordnikius.superapp.routine.exercise.step.StretchStep
 import com.lordnikius.superapp.util.BeepToneManager
 import com.lordnikius.superapp.util.TextToSpeechManager
 import com.lordnikius.superapp.R
+import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class LongitudinalTwineExercise @Inject constructor(
@@ -13,7 +14,7 @@ class LongitudinalTwineExercise @Inject constructor(
     textToSpeechManager: TextToSpeechManager,
 ) : StretchingExercise(
     nameRes = R.string.longitudinal_twine,
-    steps = listOf(
+    steps = flowOf(
         PreparationStep("Longitudinal twine", PREPARATION_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         ChangeStep(textToSpeechManager),

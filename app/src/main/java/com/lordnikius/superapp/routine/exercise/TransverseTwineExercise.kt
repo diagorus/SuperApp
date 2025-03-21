@@ -6,6 +6,7 @@ import com.lordnikius.superapp.routine.exercise.step.StretchStep
 import com.lordnikius.superapp.util.BeepToneManager
 import com.lordnikius.superapp.util.TextToSpeechManager
 import com.lordnikius.superapp.R
+import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class TransverseTwineExercise @Inject constructor(
@@ -13,7 +14,7 @@ class TransverseTwineExercise @Inject constructor(
     textToSpeechManager: TextToSpeechManager,
 ) : StretchingExercise(
     nameRes = R.string.transverse_twine,
-    steps = listOf(
+    steps = flowOf(
         PreparationStep("Transverse twine", PREPARATION_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         RelaxStep(textToSpeechManager, beepToneManager),

@@ -6,6 +6,7 @@ import com.lordnikius.superapp.routine.exercise.step.StretchStep
 import com.lordnikius.superapp.util.BeepToneManager
 import com.lordnikius.superapp.util.TextToSpeechManager
 import com.lordnikius.superapp.R
+import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class QuadsExercise @Inject constructor(
@@ -13,7 +14,7 @@ class QuadsExercise @Inject constructor(
     textToSpeechManager: TextToSpeechManager,
 ) : StretchingExercise(
     nameRes = R.string.quads,
-    steps = listOf(
+    steps = flowOf(
         PreparationStep("Quads", PREPARATION_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         ChangeStep(textToSpeechManager),

@@ -6,6 +6,7 @@ import com.lordnikius.superapp.routine.exercise.step.ChangeStep
 import com.lordnikius.superapp.routine.exercise.step.PreparationStep
 import com.lordnikius.superapp.util.BeepToneManager
 import com.lordnikius.superapp.util.TextToSpeechManager
+import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class BackTwistsExercise @Inject constructor(
@@ -13,7 +14,7 @@ class BackTwistsExercise @Inject constructor(
     textToSpeechManager: TextToSpeechManager,
 ) : StretchingExercise(
     nameRes = R.string.back_twists,
-    steps = listOf(
+    steps = flowOf(
         PreparationStep("Back twists", PREPARATION_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         ChangeStep(textToSpeechManager),
