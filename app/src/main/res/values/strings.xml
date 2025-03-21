@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Super App</string>
+    <string name="stretching">Stretching</string>
+    <string name="start">Start</string>
+    <string name="hands">Hands</string>
+    <string name="back_twists">Back twists</string>
+    <string name="longitudinal_twine">Longitudinal twine</string>
+    <string name="transverse_twine">Transverse twine</string>
+    <string name="quads">Quads</string>
+    <string name="butt_and_back">Butt and Back</string>
+    <string name="preparation">Preparation</string>
+    <string name="stretch">Stretch</string>
+    <string name="relax">Relax</string>
+    <string name="change">Change</string>
+    <string name="end">End</string>
+    <string name="hyphen_divider">%s - %s</string>
+</resources>
