@@ -7,6 +7,8 @@ import com.lordnikius.superapp.routine.exercise.step.StretchStep
 import com.lordnikius.superapp.util.BeepToneManager
 import com.lordnikius.superapp.util.TextToSpeechManager
 import com.lordnikius.superapp.R
+import com.lordnikius.superapp.routine.exercise.step.BUTT_AND_BACK_PREPARATION_STEP_DURATION
+import com.lordnikius.superapp.routine.exercise.step.CHANGE_TO_BACK_PREPARATION_STEP_DURATION
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
@@ -16,29 +18,23 @@ class ButtAndBackExercise @Inject constructor(
 ) : StretchingExercise(
     nameRes = R.string.butt_and_back,
     steps = flowOf(
-        PreparationStep("Butt and back", PREPARATION_DURATION, textToSpeechManager),
+        PreparationStep("Butt and back", BUTT_AND_BACK_PREPARATION_STEP_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         ChangeStep(textToSpeechManager),
         StretchStep(beepToneManager),
-        PreparationStep("Back", CHANGE_TO_BACK_DURATION, textToSpeechManager),
+        PreparationStep("Back", CHANGE_TO_BACK_PREPARATION_STEP_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         RelaxStep(textToSpeechManager, beepToneManager),
         StretchStep(beepToneManager),
         ChangeStep(textToSpeechManager),
         StretchStep(beepToneManager),
-        PreparationStep("Back", CHANGE_TO_BACK_DURATION, textToSpeechManager),
+        PreparationStep("Back", CHANGE_TO_BACK_PREPARATION_STEP_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         RelaxStep(textToSpeechManager, beepToneManager),
         StretchStep(beepToneManager),
         ChangeStep(textToSpeechManager),
         StretchStep(beepToneManager),
-        PreparationStep("Back", CHANGE_TO_BACK_DURATION, textToSpeechManager),
+        PreparationStep("Back", CHANGE_TO_BACK_PREPARATION_STEP_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
     ),
-) {
-
-    companion object {
-        private const val PREPARATION_DURATION = 10
-        private const val CHANGE_TO_BACK_DURATION = 5
-    }
-}
+)

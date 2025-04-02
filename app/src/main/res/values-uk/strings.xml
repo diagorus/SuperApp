@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="stretching">Розтяжка</string>
+    <string name="start">Початок</string>
+    <string name="hands">Руки</string>
+    <string name="back_twists">Скручування спини</string>
+    <string name="longitudinal_twine">Лінійний шпагат</string>
+    <string name="transverse_twine">Поперечний шпагат</string>
+    <string name="quads">Квадріцепси</string>
+    <string name="butt_and_back">Дупка і спина</string>
+    <string name="preparation">Підготовка</string>
+    <string name="stretch">Розтяжка</string>
+    <string name="relax">Відпочинок</string>
+    <string name="change">Зміна</string>
+    <string name="end">Кінець</string>
+</resources>

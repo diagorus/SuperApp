@@ -9,7 +9,7 @@ import kotlin.time.toDuration
 
 class PreparationStep(
     private val exerciseName: String,
-    private val durationInSeconds: Int,
+    private val durationInSeconds: Double,
     private val textToSpeechManager: TextToSpeechManager,
 ) : StretchingExerciseStep(R.string.preparation) {
 

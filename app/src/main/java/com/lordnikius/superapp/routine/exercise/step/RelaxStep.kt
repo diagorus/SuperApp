@@ -15,12 +15,8 @@ class RelaxStep(
 
     override suspend fun step() {
         textToSpeechManager.speak("Relax!", TextToSpeech.QUEUE_FLUSH)
-        delay(HALF_DURATION.toDuration(DurationUnit.SECONDS))
+        delay(RELAX_STEP_SECONDS_HALF_DURATION.toDuration(DurationUnit.SECONDS))
         beepToneManager.playDoubleBeepTone()
-        delay(HALF_DURATION.toDuration(DurationUnit.SECONDS))
-    }
-
-    companion object {
-        const val HALF_DURATION = 5
+        delay(RELAX_STEP_SECONDS_HALF_DURATION.toDuration(DurationUnit.SECONDS))
     }
 }

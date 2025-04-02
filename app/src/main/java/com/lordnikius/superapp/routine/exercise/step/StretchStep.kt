@@ -12,10 +12,6 @@ class StretchStep(
 
     override suspend fun step() {
         beepToneManager.playSingleBeepTone()
-        delay(DURATION.toDuration(DurationUnit.SECONDS))
-    }
-
-    companion object {
-        const val DURATION = 30
+        delay(STRETCH_STEP_SECONDS_DURATION.toDuration(DurationUnit.SECONDS))
     }
 }

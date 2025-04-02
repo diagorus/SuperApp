@@ -6,6 +6,7 @@ import com.lordnikius.superapp.routine.exercise.step.StretchStep
 import com.lordnikius.superapp.util.BeepToneManager
 import com.lordnikius.superapp.util.TextToSpeechManager
 import com.lordnikius.superapp.R
+import com.lordnikius.superapp.routine.exercise.step.QUADS_PREPARATION_STEP_DURATION
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ class QuadsExercise @Inject constructor(
 ) : StretchingExercise(
     nameRes = R.string.quads,
     steps = flowOf(
-        PreparationStep("Quads", PREPARATION_DURATION, textToSpeechManager),
+        PreparationStep("Quads", QUADS_PREPARATION_STEP_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         ChangeStep(textToSpeechManager),
         StretchStep(beepToneManager),
@@ -28,9 +29,4 @@ class QuadsExercise @Inject constructor(
         ChangeStep(textToSpeechManager),
         StretchStep(beepToneManager),
     ),
-) {
-
-    companion object {
-        private const val PREPARATION_DURATION = 10
-    }
-}
+)

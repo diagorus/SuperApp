@@ -1,6 +1,7 @@
 package com.lordnikius.superapp.routine.exercise
 
 import com.lordnikius.superapp.R
+import com.lordnikius.superapp.routine.exercise.step.BACK_TWISTS_PREPARATION_STEP_DURATION
 import com.lordnikius.superapp.routine.exercise.step.StretchStep
 import com.lordnikius.superapp.routine.exercise.step.ChangeStep
 import com.lordnikius.superapp.routine.exercise.step.PreparationStep
@@ -15,7 +16,7 @@ class BackTwistsExercise @Inject constructor(
 ) : StretchingExercise(
     nameRes = R.string.back_twists,
     steps = flowOf(
-        PreparationStep("Back twists", PREPARATION_DURATION, textToSpeechManager),
+        PreparationStep("Back twists", BACK_TWISTS_PREPARATION_STEP_DURATION, textToSpeechManager),
         StretchStep(beepToneManager),
         ChangeStep(textToSpeechManager),
         StretchStep(beepToneManager),
@@ -28,9 +29,4 @@ class BackTwistsExercise @Inject constructor(
         ChangeStep(textToSpeechManager),
         StretchStep(beepToneManager),
     ),
-) {
-
-    companion object {
-        private const val PREPARATION_DURATION = 15
-    }
-}
+)

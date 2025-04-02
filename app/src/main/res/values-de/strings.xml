@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="stretching">Dehnen</string>
+    <string name="start">Beginn</string>
+    <string name="hands">Hände</string>
+    <string name="back_twists">Wirbelsäulendrehungen</string>
+    <string name="longitudinal_twine">Längsspagat</string>
+    <string name="transverse_twine">Seitspagat</string>
+    <string name="quads">Oberschenkelmuskeln</string>
+    <string name="butt_and_back">Gesäß und Rücken</string>
+    <string name="preparation">Vorbereitung</string>
+    <string name="stretch">Dehnen</string>
+    <string name="relax">Entspannung</string>
+    <string name="change">Wechselung</string>
+    <string name="end">Ende</string>
+</resources>

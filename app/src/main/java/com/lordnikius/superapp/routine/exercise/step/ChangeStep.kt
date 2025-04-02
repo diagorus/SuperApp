@@ -13,10 +13,6 @@ class ChangeStep(
 
     override suspend fun step() {
         textToSpeechManager.speak("Change!", TextToSpeech.QUEUE_FLUSH)
-        delay(DURATION.toDuration(DurationUnit.SECONDS))
-    }
-
-    companion object {
-        const val DURATION = 5
+        delay(CHANGE_STEP_SECONDS_DURATION.toDuration(DurationUnit.SECONDS))
     }
 }

@@ -1,9 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Super App</string>
-    <string name="english" translatable="false">English</string>
-    <string name="german" translatable="false">Deutsch</string>
-    <string name="russian" translatable="false">Русский</string>
-    <string name="ukrainian" translatable="false">Українська</string>
     <string name="stretching">Stretching</string>
     <string name="start">Start</string>
     <string name="hands">Hands</string>
