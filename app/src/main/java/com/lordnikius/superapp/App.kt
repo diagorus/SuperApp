@@ -1,6 +1,8 @@
 package com.lordnikius.superapp
 
 import android.app.Application
+import android.content.Context
+import androidx.core.content.ContextCompat
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -14,4 +16,8 @@ class App : Application() {
             Timber.plant(Timber.DebugTree())
         }
     }
+//
+//    override fun attachBaseContext(base: Context) {
+//        super.attachBaseContext(ContextCompat.getContextForLanguage(base))
+//    }
 }

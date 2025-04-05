@@ -8,6 +8,7 @@ import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat
 import kotlinx.parcelize.Parcelize
 
 sealed interface StringUiData : Parcelable {
@@ -40,6 +41,7 @@ sealed interface StringUiData : Parcelable {
 
     @SuppressWarnings("SpreadOperator")
     fun transformToString(context: Context): String {
+//        val localisedContext = ContextCompat.getContextForLanguage(context)
         return when (this) {
             is Value -> {
                 value

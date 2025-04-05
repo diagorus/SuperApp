@@ -1,4 +1,4 @@
-package com.lordnikius.superapp.util.module.coroutines
+package com.lordnikius.superapp.util.coroutines
 
 import javax.inject.Qualifier
 
