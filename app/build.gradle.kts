@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
     kotlin("plugin.serialization") version "2.0.21"
+    alias(libs.plugins.compose.compiler)
 }
 
 val keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -31,10 +32,22 @@ android {
         applicationId = "com.lordnikius.superapp"
         minSdk = 24
         targetSdk = 36
+        compileSdk = 36
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val supportedLocales = listOf(
+            "en",
+            "de",
+            "uk",
+            "ru",
+        )
+        val supportedLocalesString = supportedLocales.joinToString(",") { "\"$it\"" }
+
+        buildConfigField("String[]", "SUPPORTED_LOCALE_TAGS", "new String[] {$supportedLocalesString}")
+        androidResources.localeFilters += supportedLocales
     }
     buildFeatures {
         buildConfig = true
@@ -94,10 +107,17 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
-
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     kapt(libs.timber)
 
     implementation(libs.androidx.ui.tooling.preview)
+
+    implementation(libs.pausing.coroutine.dispatcher)
+    implementation(libs.androidx.datastore.preferences)
+
     debugImplementation(libs.androidx.ui.tooling)
 }
 

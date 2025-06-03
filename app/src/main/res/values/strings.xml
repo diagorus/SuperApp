@@ -20,4 +20,11 @@
     <string name="exercise_get_ready">%s, get ready!</string>
     <string name="congratulations_routine_end">Congratulations! Now, life continues!</string>
     <string name="back">Back</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="voice_unavailable_title">Voice for this language is currently unavailable.</string>
+    <string name="voice_unavailable_description"> You can download this language from System Settings or choose another language.</string>
+    <string name="to_settings">To Settings</string>
+    <string name="text_to_speech_engine">Speech engine</string>
+    <string name="language">Language</string>
 </resources>

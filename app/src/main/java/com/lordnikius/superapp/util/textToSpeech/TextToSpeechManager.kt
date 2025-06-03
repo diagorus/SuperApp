@@ -2,64 +2,62 @@ package com.lordnikius.superapp.util.textToSpeech
 
 import android.content.Context
 import android.speech.tts.TextToSpeech
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
-import com.lordnikius.superapp.util.StringUiData
+import com.lordnikius.superapp.util.PreferencesDataStoreManager
+import com.lordnikius.superapp.util.coroutines.ApplicationScope
+import com.lordnikius.superapp.util.locale.StringUiData
+import com.lordnikius.superapp.util.locale.SupportedLocale
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Deferred
-import timber.log.Timber
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.suspendCoroutine
 
+@Singleton
 class TextToSpeechManager @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @ApplicationContext private val applicationContext: Context,
+    @ApplicationScope private val applicationScope: CoroutineScope,
+    private val textToSpeechInitializationManager: TextToSpeechInitializationManager,
+    private val preferencesDataStoreManager: PreferencesDataStoreManager,
+    private val utteranceManager: UtteranceManager,
 ) {
 
-    private val utteranceManager = UtteranceManager()
-    private var ttsDeferred: Deferred<TextToSpeech> = initAsync()
-
-    private suspend fun get(): TextToSpeech {
-        try {
-            return ttsDeferred.await()
-        } catch (e: Throwable) {
-            Timber.e(e)
-            ttsDeferred = initAsync()
-            return get()
-        }
+    suspend fun isLanguageAvailable(supportedLocale: SupportedLocale): Boolean {
+        val textToSpeech = textToSpeechInitializationManager.getInstance()
+        val languageStatus = textToSpeech.isLanguageAvailable(Locale(supportedLocale.languageTag))
+        return languageStatus != TextToSpeech.LANG_MISSING_DATA &&
+                languageStatus != TextToSpeech.LANG_NOT_SUPPORTED
     }
 
-    private fun initAsync(): Deferred<TextToSpeech> {
-        return CompletableDeferred<TextToSpeech>().also { deferred ->
-            SelfReference.create<TextToSpeech> {
-                TextToSpeech(context) { status ->
-                    if (status == TextToSpeech.SUCCESS) {
-                        val primaryLocale = AppCompatDelegate.getApplicationLocales()[0]
-                        val languageStatus = self.setLanguage(primaryLocale)
-                        when (languageStatus) {
-                            TextToSpeech.LANG_AVAILABLE,
-                            TextToSpeech.LANG_COUNTRY_AVAILABLE,
-                            TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE -> {
-                                self.setOnUtteranceProgressListener(utteranceManager)
-                                deferred.complete(self)
-                            }
-                            else -> {
-                                deferred.completeExceptionally(Exception(languageStatus.toString()))
-                            }
-                        }
-                    } else {
-                        deferred.completeExceptionally(Exception(status.toString()))
-                    }
-                }
-            }
+    suspend fun getCurrentEngine(): TextToSpeechEngine? {
+        val textToSpeech = textToSpeechInitializationManager.getInstance()
+        val currentEngine = preferencesDataStoreManager.chosenTextToSpeechEnginePackageFlow.firstOrNull()
+            ?: textToSpeech.defaultEngine
+        return getEngines().find { it.pkg == currentEngine }
+    }
+
+    suspend fun getEngines(): List<TextToSpeechEngine> {
+        val textToSpeech = textToSpeechInitializationManager.getInstance()
+        return textToSpeech.engines.map { TextToSpeechEngine(it.name, it.label) }
+    }
+
+    suspend fun setEngine(engine: TextToSpeechEngine) {
+        preferencesDataStoreManager.saveChosenTextToSpeechEnginePackage(engine.pkg)
+        textToSpeechInitializationManager.reinit()
+    }
+
+    fun onLanguageChanged() {
+        applicationScope.launch {
+            textToSpeechInitializationManager.reinit()
         }
     }
 
     suspend fun speak(text: StringUiData) {
-        val tts = get()
+        val tts = textToSpeechInitializationManager.getInstance()
         suspendCoroutine { continuation ->
-            val localisedText = text.transformToString(context)
+            val localisedText = text.transformToString(applicationContext)
             val utterance = utteranceManager.create(localisedText, TextToSpeech.QUEUE_FLUSH, continuation)
             tts.speak(utterance.text, utterance.queueMode, null, utterance.id)
         }

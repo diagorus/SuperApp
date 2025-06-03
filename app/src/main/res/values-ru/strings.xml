@@ -15,5 +15,12 @@
     <string name="end">Конец</string>
     <string name="exercise_get_ready">%s, готовся!</string>
     <string name="congratulations_routine_end">Поздравляю! Теперь жизнь может продолжится!</string>
-    <string name="back">Жопка</string>
+    <string name="back">Спина</string>
+    <string name="pause">Пауза</string>
+    <string name="resume">Продолжить</string>
+    <string name="voice_unavailable_title">Голосовая озвучка для этого языка в данный момент недоступна.</string>
+    <string name="voice_unavailable_description">Вы можете загрузить этот язык в системных настройках или выбрать другой язык.</string>
+    <string name="to_settings">Перейти в настройки</string>
+    <string name="text_to_speech_engine">Речевой движок</string>
+    <string name="language">Язык</string>
 </resources>

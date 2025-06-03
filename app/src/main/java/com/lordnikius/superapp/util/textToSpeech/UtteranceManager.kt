@@ -3,11 +3,14 @@ package com.lordnikius.superapp.util.textToSpeech
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-class UtteranceManager : UtteranceProgressListener() {
+@Singleton
+class UtteranceManager @Inject constructor() : UtteranceProgressListener() {
 
     private val utterances = HashMap<String, Utterance>()
     private var nextUtteranceId = 0L

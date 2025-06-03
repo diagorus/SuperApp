@@ -15,5 +15,12 @@
     <string name="end">Ende</string>
     <string name="exercise_get_ready">%s, mach dich bereit!</string>
     <string name="congratulations_routine_end">Herzlichen Glückwunsch! Nun geht das Leben weiter!</string>
-    <string name="back">Gesäß</string>
+    <string name="back">Rücken</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Fortsetzen</string>
+    <string name="voice_unavailable_title">Die Sprachausgabe für diese Sprache ist derzeit nicht verfügbar.</string>
+    <string name="voice_unavailable_description">Du kannst diese Sprache über die Systemeinstellungen herunterladen oder eine andere Sprache auswählen.</string>
+    <string name="to_settings">Zu den Einstellungen</string>
+    <string name="text_to_speech_engine">Sprache-Programm</string>
+    <string name="language">Sprache</string>
 </resources>

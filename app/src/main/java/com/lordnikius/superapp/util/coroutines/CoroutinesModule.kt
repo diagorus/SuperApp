@@ -21,11 +21,12 @@ class CoroutinesModule {
     @Provides
     fun provideApplicationScope(
         @DefaultDispatcher coroutineDispatcher: CoroutineDispatcher,
-        coroutineExceptionHandler: CoroutineExceptionHandler,
+        @LoggingExceptionHandler coroutineExceptionHandler: CoroutineExceptionHandler,
     ): CoroutineScope {
         return CoroutineScope(SupervisorJob() + coroutineDispatcher + coroutineExceptionHandler)
     }
 
+    @LoggingExceptionHandler
     @Singleton
     @Provides
     fun provideCoroutineExceptionHandler(): CoroutineExceptionHandler {
