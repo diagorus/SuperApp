@@ -1,1 +1,9 @@
-/build
+# Shared module specific build outputs (mostly covered by root)
+/build/
+
+# If you have specific generated files within the shared module
+# that aren't under build/ or are for specific targets
+# e.g.
+# /generated/ios/
+# /generated/js/
+# However, KMP usually places these under the shared/build/ directory.
