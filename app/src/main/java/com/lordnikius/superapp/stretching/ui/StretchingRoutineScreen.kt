@@ -52,7 +52,7 @@ import com.lordnikius.superapp.stretching.viewModel.StretchingRoutineUiState
 import com.lordnikius.superapp.stretching.viewModel.StretchingRoutineViewModel
 import com.lordnikius.superapp.theme.AppTheme
 import com.lordnikius.superapp.util.NO_VALUE
-import com.lordnikius.superapp.util.locale.StringUiData
+import com.lordnikius.superapp.data.util.locale.StringUiData
 import com.lordnikius.superapp.util.locale.SupportedLocale
 import com.lordnikius.superapp.util.textToSpeech.TextToSpeechEngine
 

@@ -1,0 +1,9 @@
+# Android specific build outputs (mostly covered by root, but can be explicit)
+/build/
+/release/
+/debug/
+*.apk
+*.aab
+
+# Android Studio profiling files (can also be in root)
+*.hprof

@@ -4,7 +4,7 @@ import android.content.Context
 import android.speech.tts.TextToSpeech
 import com.lordnikius.superapp.util.PreferencesDataStoreManager
 import com.lordnikius.superapp.util.coroutines.ApplicationScope
-import com.lordnikius.superapp.util.locale.StringUiData
+import com.lordnikius.superapp.data.util.locale.StringUiData
 import com.lordnikius.superapp.util.locale.SupportedLocale
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope

@@ -2,7 +2,7 @@ package com.lordnikius.superapp.stretching.viewModel
 
 import com.lordnikius.superapp.stretching.SupportedLocaleWithTextToSpeechAvailability
 import com.lordnikius.superapp.util.base.BaseUiState
-import com.lordnikius.superapp.util.locale.StringUiData
+import com.lordnikius.superapp.data.util.locale.StringUiData
 import com.lordnikius.superapp.util.textToSpeech.TextToSpeechEngine
 
 data class StretchingRoutineUiState(
