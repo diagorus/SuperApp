@@ -1,14 +1,8 @@
 # Xcode
-#
-# gitignore contributors: remember to update Xcode.global.gitignore with your
-# changes simultaneously! Exceptions:
-# 1. Timestamps.
-# 2. Files that should be shared among all projects.
-
 ## User-specific files
 *.xcuserdatad/
 *.xccheckout
-*.xcodeproj/xcshareddata/xcschemes/ # Schemes can be shared, but sometimes per-user copies are made
+*.xcodeproj/xcshareddata/xcschemes/
 *.xcodeproj/project.xcworkspace/
 
 ## User-specific settings
@@ -22,12 +16,12 @@ DerivedData/
 
 ## CocoaPods
 Pods/
-Podfile.lock # Often committed, but can be ignored if everyone runs `pod install`
+Podfile.lock
 # If you're checking in Pods, then you might want to ignore only certain Pod subdirectories.
 
 ## Swift Package Manager
 .swiftpm/build/
-Packages/ # If you don't commit dependencies resolved by SPM
+Packages/
 
 ## Carthage
 Carthage/Build
@@ -50,4 +44,4 @@ fastlane/screenshots
 fastlane/logs
 
 # Localisation files
-*.strings # If they are generated or you prefer to keep them out of git for some reason
+*.strings

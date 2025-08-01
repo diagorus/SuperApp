@@ -26,13 +26,13 @@ Desktop.ini
 # Gradle
 .gradle/
 build/
-!build/generated/ # Sometimes useful to see generated code, but can be ignored too
-!build/generated-sources/ # Specific KMP generated sources
-!build/compose/ # For Compose Multiplatform generated resources
+!build/generated/
+!build/generated-sources/
+!build/compose/
 gradle-app.setting
-local.properties # Contains SDK path and other local settings, DO NOT COMMIT
-gradle/wrapper/gradle-wrapper.jar # If you prefer not to commit the wrapper jar
-!gradle-wrapper.properties # Keep this to ensure consistent Gradle versions
+local.properties
+gradle/wrapper/gradle-wrapper.jar
+!gradle-wrapper.properties
 
 # Build artifacts
 *.apk
@@ -61,24 +61,20 @@ secrets.*/
 *.p12
 *.pem
 *.key
-google-services.json # If you're using Firebase and don't want to commit it directly
-# If you are storing API keys or other secrets, make sure to add patterns for them
+google-services.json
 
 # Android Studio Profiling
 *.hprof
 *.snapshot
 
 # Kotlin Multiplatform specific
-.kotlin/ # Kotlin daemon files
-kotlin-js-store/ # For JS target
+.kotlin/
+kotlin-js-store/
 
 # Compose Multiplatform
 compose-compiler-hosted-reports/
-.compose/ # General compose cache/temp files
+.compose/
 
 # Local configuration files from tools
 .detekt/
-.config/ # if used by local tools
-
-# Specific to your project if any tools create local files
-# e.g., some_local_tool_cache/
+.config/
