@@ -1,3 +1,0 @@
-package com.lordnikius.superapp.stretching.viewModel
-
-object ShowVoiceDownloadSettings

@@ -1,64 +1,36 @@
-import org.jetbrains.compose.ExperimentalComposeLibrary
-
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    kotlin("plugin.serialization") version "2.0.21"
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
-
-    // Target declarations - add or remove as needed below. These define
-    // which platforms this KMP module supports.
-    // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
         namespace = "com.lordnikius.superapp.shared"
         compileSdk = 36
         minSdk = 24
-
-        withHostTestBuilder {
-        }
 
         withDeviceTestBuilder {
             sourceSetTreeName = "test"
         }.configure {
             instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
+        androidResources.enable = true
     }
 
-    // For iOS targets, this is also where you should
-    // configure native binary output. For more information, see:
-    // https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
-
-    // A step-by-step guide on how to include this library in an XCode
-    // project can be found here:
-    // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "sharedKit"
-
-    iosX64 {
-        binaries.framework {
-            baseName = xcfName
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "sharedKit"
         }
     }
 
-    iosArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    iosSimulatorArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    // Source set declarations.
-    // Declaring a target automatically creates a source set with the same name. By default, the
-    // Kotlin Gradle Plugin creates additional source sets that depend on each other, since it is
-    // common to share sources between related targets.
-    // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
         commonMain {
             dependencies {
@@ -68,6 +40,17 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.material3)
                 implementation(compose.components.resources)
+
+
+                implementation(libs.koin.core)
+                api(libs.koin.annotations)
+                implementation(libs.koin.compose.viewmodel.nav)
+
+                implementation(libs.androidx.datastore.preferences)
+
+                implementation(libs.lifecycle.viewmodel.compose)
+                implementation(libs.kermit)
+
             }
         }
 
@@ -79,9 +62,30 @@ kotlin {
 
         androidMain {
             dependencies {
-                // Add Android-specific dependencies here. Note that this source set depends on
-                // commonMain by default and will correctly pull the Android artifacts of any KMP
-                // dependencies declared in commonMain.
+                implementation(project(":androidLibrary"))
+
+                implementation(libs.androidx.appcompat)
+                implementation(libs.material)
+
+                implementation(project.dependencies.platform("androidx.compose:compose-bom:2025.08.00"))
+
+                implementation(libs.androidx.material3)
+                implementation(libs.androidx.navigation.compose)
+
+                implementation(libs.kotlinx.serialization.json)
+
+                implementation(libs.coil.compose)
+                implementation(libs.coil.network.okhttp)
+
+                implementation(libs.androidx.ui.tooling.preview)
+                implementation(libs.androidx.datastore.preferences)
+
+                // Media3
+                implementation(libs.androidx.media3.exoplayer)
+                implementation(libs.androidx.media3.common.ktx)
+                implementation(libs.androidx.media3.datasource)
+
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
             }
         }
 
@@ -95,13 +99,31 @@ kotlin {
 
         iosMain {
             dependencies {
-                // Add iOS-specific dependencies here. This a source set created by Kotlin Gradle
-                // Plugin (KGP) that each specific iOS target (e.g., iosX64) depends on as
-                // part of KMP’s default source set hierarchy. Note that this source set depends
-                // on common by default and will correctly pull the iOS artifacts of any
-                // KMP dependencies declared in commonMain.
             }
         }
     }
 
+    sourceSets.named("commonMain").configure {
+        kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
+    }
+}
+
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+    add("kspAndroid", libs.koin.ksp.compiler)
+    add("kspIosX64", libs.koin.ksp.compiler)
+    add("kspIosArm64", libs.koin.ksp.compiler)
+    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
+}
+
+tasks.matching { it.name.startsWith("ksp") && it.name != "kspCommonMainKotlinMetadata" }.configureEach {
+    dependsOn("kspCommonMainKotlinMetadata")
+}
+
+compose.resources {
+    packageOfResClass = "superapp.shared.generated.resources"
+}
+
+ksp {
+    arg("KOIN_CONFIG_CHECK","true")
 }

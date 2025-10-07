@@ -1,7 +1,5 @@
-import org.gradle.kotlin.dsl.maven
-
+include(":androidLibrary")
 include(":shared")
-
 
 pluginManagement {
     repositories {
@@ -16,6 +14,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {

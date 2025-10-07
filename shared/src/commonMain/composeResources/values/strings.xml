@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name" translatable="false">Super App</string>
+    <string name="english" translatable="false">English</string>
+    <string name="german" translatable="false">Deutsch</string>
+    <string name="russian" translatable="false">Русский</string>
+    <string name="ukrainian" translatable="false">Українська</string>
+    <string name="stretching">Stretching</string>
+    <string name="start">Start</string>
+    <string name="hands">Hands</string>
+    <string name="back_twists">Back twists</string>
+    <string name="longitudinal_twine">Longitudinal twine</string>
+    <string name="transverse_twine">Transverse twine</string>
+    <string name="quads">Quads</string>
+    <string name="butt_and_back">Butt and Back</string>
+    <string name="preparation">Preparation</string>
+    <string name="stretch">Stretch</string>
+    <string name="relax">Relax</string>
+    <string name="change">Change</string>
+    <string name="end">End</string>
+    <string name="exercise_get_ready">%s, get ready!</string>
+    <string name="congratulations_routine_end">Congratulations! Now, life continues!</string>
+    <string name="back">Back</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="voice_unavailable_title">Voice for this language is currently unavailable.</string>
+    <string name="voice_unavailable_description"> You can download this language from System Settings or choose another language.</string>
+    <string name="to_settings">To Settings</string>
+    <string name="text_to_speech_engine">Speech engine</string>
+    <string name="language">Language</string>
+</resources>

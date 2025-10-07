@@ -3,11 +3,10 @@ import java.io.FileInputStream
 
 plugins {
     id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
-    kotlin("plugin.serialization") version "2.0.21"
+    alias(libs.plugins.composeCompiler)
 }
 
 val keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -43,9 +42,6 @@ android {
             "uk",
             "ru",
         )
-        val supportedLocalesString = supportedLocales.joinToString(",") { "\"$it\"" }
-
-        buildConfigField("String[]", "SUPPORTED_LOCALE_TAGS", "new String[] {$supportedLocalesString}")
         androidResources.localeFilters += supportedLocales
     }
     buildFeatures {
@@ -62,9 +58,6 @@ android {
             applicationIdSuffix = ".debug"
             isDebuggable = true
         }
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.15"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_19
@@ -89,37 +82,6 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-
-    val composeBom = platform("androidx.compose:compose-bom:2025.01.01")
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-    implementation(libs.androidx.ui.text.google.fonts)
-
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.timber)
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
-    kapt(libs.timber)
-
-    implementation(libs.androidx.ui.tooling.preview)
-
-    implementation(libs.pausing.coroutine.dispatcher)
-    implementation(libs.androidx.datastore.preferences)
-
-    debugImplementation(libs.androidx.ui.tooling)
 }
 
 kapt {
