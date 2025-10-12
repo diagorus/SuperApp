@@ -1,7 +1,12 @@
 package com.lordnikius.superapp.shared.util.locale
 
+import androidx.compose.runtime.Composable
 import org.jetbrains.compose.resources.PluralStringResource
 import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.getPluralString
+import org.jetbrains.compose.resources.getString
+import org.jetbrains.compose.resources.pluralStringResource
+import org.jetbrains.compose.resources.stringResource
 
 sealed interface StringUiData {
 

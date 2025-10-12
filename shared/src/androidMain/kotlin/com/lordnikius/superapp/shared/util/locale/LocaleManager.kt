@@ -6,12 +6,11 @@ import androidx.core.os.LocaleListCompat
 import org.koin.core.annotation.Single
 import java.util.Locale
 
-@Single
-class LocaleManager(
+actual class LocaleManager(
     private val context: Context,
 ) {
 
-    val supportedLocales: List<SupportedLocale> by lazy {
+    actual val supportedLocales: List<SupportedLocale> by lazy {
         listOf(
             "en",
             "de",
@@ -36,7 +35,7 @@ class LocaleManager(
         )
     }
 
-    fun getCurrentLocale(): SupportedLocale {
+    actual fun getCurrentLocale(): SupportedLocale {
         val chosenLocale = AppCompatDelegate.getApplicationLocales()
             .toLanguageTags()
             .split(',')
@@ -52,7 +51,7 @@ class LocaleManager(
         return defaultLocale.toSupportedLocale()
     }
 
-    fun setLocale(locale: SupportedLocale) {
+    actual fun setLocale(locale: SupportedLocale) {
         AppCompatDelegate.setApplicationLocales(
             LocaleListCompat.forLanguageTags(locale.languageTag)
         )

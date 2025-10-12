@@ -1,9 +1,7 @@
 package com.lordnikius.superapp.shared
 
-import android.os.Bundle
-import android.view.WindowManager
-import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -12,13 +10,18 @@ import com.lordnikius.superapp.shared.stretching.ui.StretchingRoutineScreen
 import com.lordnikius.superapp.shared.stretching.ui.viewModel.StretchingRoutineViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            App()
+@Composable
+fun App() {
+    MaterialTheme {
+        NavHost(
+            navController = rememberNavController(),
+            startDestination = StretchingRoutineRoute,
+        ) {
+            composable<StretchingRoutineRoute> {
+                val viewModel = koinViewModel<StretchingRoutineViewModel>()
+                StretchingRoutineScreen(viewModel)
+            }
         }
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 }
+

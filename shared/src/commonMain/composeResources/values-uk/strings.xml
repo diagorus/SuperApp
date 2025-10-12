@@ -13,7 +13,7 @@
     <string name="relax">Відпочинок</string>
     <string name="change">Зміна</string>
     <string name="end">Кінець</string>
-    <string name="exercise_get_ready">%s, готуйсь!</string>
+    <string name="exercise_get_ready">%1$s, готуйсь!</string>
     <string name="congratulations_routine_end">Вітаннячка! Життя тече далі!</string>
     <string name="back">Спина</string>
     <string name="pause">Пауза</string>

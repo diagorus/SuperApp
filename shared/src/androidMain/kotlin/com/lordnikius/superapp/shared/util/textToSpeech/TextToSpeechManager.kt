@@ -1,22 +1,24 @@
 package com.lordnikius.superapp.shared.util.textToSpeech
 
-import android.content.Context
 import android.speech.tts.TextToSpeech
+import com.lordnikius.superapp.shared.util.preferences.PreferencesDataStoreManager
 import com.lordnikius.superapp.shared.util.koin.CoroutinesModule
 import com.lordnikius.superapp.shared.util.koin.CoroutinesModule.ApplicationScope
-import com.lordnikius.superapp.shared.util.locale.transformToString
 import com.lordnikius.superapp.shared.util.locale.StringUiData
 import com.lordnikius.superapp.shared.util.locale.SupportedLocale
-import com.lordnikius.superapp.shared.util.PreferencesDataStoreManager
+import com.lordnikius.superapp.shared.util.locale.transformToString
+import com.lordnikius.superapp.shared.util.textToSpeech.auxiliaries.TextToSpeechInitializationManager
+import com.lordnikius.superapp.shared.util.textToSpeech.auxiliaries.UtteranceManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import org.koin.core.annotation.Single
-import java.util.*
+import java.util.Locale
 import kotlin.coroutines.suspendCoroutine
 
 @Single
-class TextToSpeechManager(
+actual class TextToSpeechManager(
     @ApplicationScope
     private val applicationScope: CoroutineScope,
     private val textToSpeechInitializationManager: TextToSpeechInitializationManager,
@@ -24,26 +26,26 @@ class TextToSpeechManager(
     private val utteranceManager: UtteranceManager,
 ) {
 
-    suspend fun isLanguageAvailable(supportedLocale: SupportedLocale): Boolean {
+    actual suspend fun isLanguageAvailable(locale: SupportedLocale): Boolean {
         val textToSpeech = textToSpeechInitializationManager.getInstance()
-        val languageStatus = textToSpeech.isLanguageAvailable(Locale(supportedLocale.languageTag))
+        val languageStatus = textToSpeech.isLanguageAvailable(Locale(locale.languageTag))
         return languageStatus != TextToSpeech.LANG_MISSING_DATA &&
                 languageStatus != TextToSpeech.LANG_NOT_SUPPORTED
     }
 
-    suspend fun getCurrentEngine(): TextToSpeechEngine? {
+    actual suspend fun getCurrentEngine(): TextToSpeechEngine? {
         val textToSpeech = textToSpeechInitializationManager.getInstance()
         val currentEngine = preferencesDataStoreManager.chosenTextToSpeechEnginePackageFlow.firstOrNull()
             ?: textToSpeech.defaultEngine
         return getEngines().find { it.pkg == currentEngine }
     }
 
-    suspend fun getEngines(): List<TextToSpeechEngine> {
+    actual suspend fun getEngines(): List<TextToSpeechEngine> {
         val textToSpeech = textToSpeechInitializationManager.getInstance()
         return textToSpeech.engines.map { TextToSpeechEngine(it.name, it.label) }
     }
 
-    suspend fun setEngine(engine: TextToSpeechEngine) {
+    actual suspend fun setEngine(engine: TextToSpeechEngine) {
         preferencesDataStoreManager.saveChosenTextToSpeechEnginePackage(engine.pkg)
         textToSpeechInitializationManager.reinit()
     }
@@ -54,7 +56,7 @@ class TextToSpeechManager(
         }
     }
 
-    suspend fun speak(text: StringUiData) {
+    actual suspend fun speak(text: StringUiData) {
         val tts = textToSpeechInitializationManager.getInstance()
         val localisedText = text.transformToString()
         suspendCoroutine { continuation ->
