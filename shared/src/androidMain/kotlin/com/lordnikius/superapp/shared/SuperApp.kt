@@ -6,12 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.core.content.ContextCompat
-import com.lordnikius.superapp.shared.util.koin.KoinDebugApplication
+import com.lordnikius.superapp.shared.util.koin.initKoin
 import com.lordnikius.superapp.shared.util.textToSpeech.TextToSpeechManager
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.ksp.generated.*
 
 class SuperApp : Application() {
 
@@ -20,7 +19,7 @@ class SuperApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        KoinDebugApplication.startKoin {
+        initKoin {
             androidContext(this@SuperApp)
             androidLogger()
         }

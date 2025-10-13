@@ -126,10 +126,10 @@ class StretchingRoutineViewModel(
                         delay(action.duration)
                     }
                     is StepAction.Beep -> {
-                        beepToneManager.playSingleBeepTone()
+                        beepToneManager.playBeep()
                     }
                     is StepAction.DoubleBeep -> {
-                        beepToneManager.playDoubleBeepTone()
+                        beepToneManager.playDoubleBeep()
                     }
                 }
             }

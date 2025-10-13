@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+// import shared
 
 @main
 struct superAppApp: App {
+
+    // init() {
+    //     InitKt.initKoin()
+    // }
+
     var body: some Scene {
         WindowGroup {
             ContentView()

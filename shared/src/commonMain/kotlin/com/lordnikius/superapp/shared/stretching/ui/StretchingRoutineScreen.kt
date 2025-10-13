@@ -50,7 +50,7 @@ fun StretchingRoutineScreen(
             )
         }
         uiState.showVoiceDownloadSettings != null -> {
-            // todo
+            //   todo actual / expect function
 //            val launcher = rememberLauncherForActivityResult(
 //                ActivityResultContracts.StartActivityForResult()
 //            ) {

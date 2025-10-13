@@ -2,4 +2,6 @@ package com.lordnikius.superapp.shared.util
 
 import com.nikitabilous.androidlibrary.BuildConfig
 
-actual val isDebug = BuildConfig.DEBUG
+actual fun isDebug(): Boolean {
+    return BuildConfig.DEBUG
+}

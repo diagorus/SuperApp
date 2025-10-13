@@ -1,43 +1,32 @@
 package com.lordnikius.superapp.shared.util.audio
 
-import android.content.Context
 import android.media.AudioManager
 import android.media.ToneGenerator
-import androidx.media3.common.MediaItem
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
-import kotlinx.coroutines.runBlocking
-import superapp.shared.generated.resources.Res
+import com.lordnikius.superapp.shared.util.koin.CoroutinesModule.DefaultDispatcher
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 
 actual class BeepToneManager(
-    context: Context,
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
 ) {
 
-    @SuppressWarnings("UnsafeOptInUsageError")
-    private val mediaPlayer = ExoPlayer.Builder(context)
-        .setMediaSourceFactory(
-            DefaultMediaSourceFactory(
-                ResolvingByteArrayDataSource.Factory { uri ->
-                    runBlocking { Res.readBytes(uri.path!!) }
-                }
-            )
-        )
-        .build()
+    private val toneGenerator = ToneGenerator(AudioManager.STREAM_MUSIC, TONE_VOLUME)
 
-    private fun play(composeResourcesPath: String) {
-        val toneGenerator = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
-        toneGenerator.startTone(ToneGenerator.TONE_CDMA_PIP, 150)
-//        mediaPlayer.setMediaItem(MediaItem.fromUri(composeResourcesPath))
-//        mediaPlayer.prepare()
-//        mediaPlayer.play()
+    actual suspend fun playBeep() {
+        play(ToneGenerator.TONE_PROP_BEEP)
     }
 
-    actual fun playSingleBeepTone() {
-        play("files/audio/single_beep.wav")
+    private suspend fun play(toneType: Int) {
+        withContext(defaultDispatcher) {
+            toneGenerator.startTone(toneType)
+        }
     }
 
-    actual fun playDoubleBeepTone() {
-        play("files/audio/double_beep.wav")
-        play("files/audio/double_beep.wav")
+    actual suspend fun playDoubleBeep() {
+        play(ToneGenerator.TONE_PROP_BEEP2)
+    }
+
+    companion object {
+        private const val TONE_VOLUME = 100
     }
 }
