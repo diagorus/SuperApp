@@ -2,12 +2,18 @@ package com.lordnikius.superapp.shared.util.textToSpeech
 
 import com.lordnikius.superapp.shared.util.locale.StringUiData
 import com.lordnikius.superapp.shared.util.locale.SupportedLocale
+import com.lordnikius.superapp.shared.util.locale.transformToString
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import org.koin.core.annotation.Single
+import platform.AVFAudio.AVSpeechSynthesizer
+import platform.AVFAudio.AVSpeechUtterance
 
-@Single
-actual class TextToSpeechManager {
+actual class TextToSpeechManager(
+    val mainDispatcher: CoroutineDispatcher,
+) {
     actual suspend fun isLanguageAvailable(locale: SupportedLocale): Boolean {
-        return false
+        return true
     }
 
     actual suspend fun getEngines(): List<TextToSpeechEngine> {
@@ -23,6 +29,11 @@ actual class TextToSpeechManager {
     }
 
     actual suspend fun speak(text: StringUiData) {
-        // do nothing
+        withContext(mainDispatcher) {
+            val localisedText = text.transformToString()
+            val utterance = AVSpeechUtterance(string = localisedText)
+            val synth = AVSpeechSynthesizer()
+            synth.speakUtterance(utterance)
+        }
     }
 }

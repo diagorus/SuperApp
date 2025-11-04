@@ -7,3 +7,5 @@
 
 # Android Studio profiling files (can also be in root)
 *.hprof
+
+google-services.json

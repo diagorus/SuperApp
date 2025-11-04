@@ -62,8 +62,6 @@ kotlin {
 
         androidMain {
             dependencies {
-                implementation(project(":androidLibrary"))
-
                 implementation(libs.androidx.appcompat)
                 implementation(libs.material)
 

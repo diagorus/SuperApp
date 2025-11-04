@@ -17,6 +17,10 @@ import org.koin.core.annotation.Named
 class CoroutinesModule {
 
     @Factory
+    @MainDispatcher
+    fun provideMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
+
+    @Factory
     @IoDispatcher
     fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
@@ -37,9 +41,11 @@ class CoroutinesModule {
     ) =
         CoroutineScope(SupervisorJob() + defaultDispatcher + coroutineExceptionHandler)
 
-
     @Named
     annotation class IoDispatcher
+
+    @Named
+    annotation class MainDispatcher
 
     @Named
     annotation class DefaultDispatcher

@@ -1,4 +1,3 @@
-include(":androidLibrary")
 include(":shared")
 
 pluginManagement {

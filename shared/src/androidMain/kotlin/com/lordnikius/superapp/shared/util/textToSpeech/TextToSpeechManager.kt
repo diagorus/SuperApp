@@ -2,7 +2,6 @@ package com.lordnikius.superapp.shared.util.textToSpeech
 
 import android.speech.tts.TextToSpeech
 import com.lordnikius.superapp.shared.util.preferences.PreferencesDataStoreManager
-import com.lordnikius.superapp.shared.util.koin.CoroutinesModule
 import com.lordnikius.superapp.shared.util.koin.CoroutinesModule.ApplicationScope
 import com.lordnikius.superapp.shared.util.locale.StringUiData
 import com.lordnikius.superapp.shared.util.locale.SupportedLocale
@@ -12,7 +11,6 @@ import com.lordnikius.superapp.shared.util.textToSpeech.auxiliaries.UtteranceMan
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
 import org.koin.core.annotation.Single
 import java.util.Locale
 import kotlin.coroutines.suspendCoroutine
@@ -50,18 +48,18 @@ actual class TextToSpeechManager(
         textToSpeechInitializationManager.reinit()
     }
 
-    fun onLanguageChanged() {
-        applicationScope.launch {
-            textToSpeechInitializationManager.reinit()
-        }
-    }
-
     actual suspend fun speak(text: StringUiData) {
         val tts = textToSpeechInitializationManager.getInstance()
         val localisedText = text.transformToString()
         suspendCoroutine { continuation ->
             val utterance = utteranceManager.create(localisedText, TextToSpeech.QUEUE_FLUSH, continuation)
             tts.speak(utterance.text, utterance.queueMode, null, utterance.id)
+        }
+    }
+
+    fun onLanguageChanged() {
+        applicationScope.launch {
+            textToSpeechInitializationManager.reinit()
         }
     }
 }

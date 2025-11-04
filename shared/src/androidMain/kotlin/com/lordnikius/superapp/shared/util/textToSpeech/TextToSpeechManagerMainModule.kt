@@ -1,6 +1,5 @@
 package com.lordnikius.superapp.shared.util.textToSpeech
 
-import com.lordnikius.superapp.shared.util.textToSpeech.TextToSpeechManager
 import org.koin.core.annotation.Configuration
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single

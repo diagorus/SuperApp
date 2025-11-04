@@ -2,7 +2,6 @@ package com.lordnikius.superapp.shared.util.textToSpeech
 
 import com.lordnikius.superapp.shared.util.locale.StringUiData
 import com.lordnikius.superapp.shared.util.locale.SupportedLocale
-import org.koin.core.annotation.Single
 
 expect class TextToSpeechManager {
     suspend fun isLanguageAvailable(locale: SupportedLocale): Boolean

@@ -70,15 +70,16 @@ class StretchingRoutineViewModel(
     }
 
     fun onStartPauseClick() {
-        if (uiState.value.currentLocale?.isTextToSpeechAvailable == true) {
-            startOrPause()
-        } else {
-            updateUiState {
-                copy(
-                    showVoiceUnavailableDialog = ShowVoiceUnavailableDialog
-                )
-            }
-        }
+        throw RuntimeException("First crash =8")
+//        if (uiState.value.currentLocale?.isTextToSpeechAvailable == true) {
+//            startOrPause()
+//        } else {
+//            updateUiState {
+//                copy(
+//                    showVoiceUnavailableDialog = ShowVoiceUnavailableDialog
+//                )
+//            }
+//        }
     }
 
     private fun startOrPause() {

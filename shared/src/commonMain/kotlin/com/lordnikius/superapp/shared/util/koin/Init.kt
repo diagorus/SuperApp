@@ -1,6 +1,5 @@
 package com.lordnikius.superapp.shared.util.koin
 
-import com.lordnikius.superapp.shared.util.isDebug
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.ksp.generated.startKoin
 
