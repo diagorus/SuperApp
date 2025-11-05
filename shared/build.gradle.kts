@@ -9,7 +9,7 @@ plugins {
 
 kotlin {
     androidLibrary {
-        namespace = "com.lordnikius.superapp.shared"
+        namespace = "com.lordnikius.nstretching.shared"
         compileSdk = 36
         minSdk = 24
 
@@ -119,7 +119,7 @@ tasks.matching { it.name.startsWith("ksp") && it.name != "kspCommonMainKotlinMet
 }
 
 compose.resources {
-    packageOfResClass = "superapp.shared.generated.resources"
+    packageOfResClass = "com.lordnikius.nstretching.shared.generated.resources"
 }
 
 ksp {

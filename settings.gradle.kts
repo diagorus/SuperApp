@@ -23,5 +23,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Super App"
+rootProject.name = "NStretching"
 include(":app")
