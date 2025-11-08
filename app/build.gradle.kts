@@ -16,7 +16,7 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
-    namespace = "com.lordnikius.nstretching"
+    namespace = "com.diagorus.nstretching"
     compileSdk = 34
 
     signingConfigs {
@@ -29,7 +29,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.lordnikius.nstretching"
+        applicationId = "com.diagorus.nstretching"
         minSdk = 24
         targetSdk = 36
         compileSdk = 36

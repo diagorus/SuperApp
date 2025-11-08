@@ -1,3 +1,0 @@
-package com.lordnikius.nstretching.shared.stretching.ui.viewModel
-
-object ShowVoiceUnavailableDialog

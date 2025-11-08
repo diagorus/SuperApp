@@ -9,7 +9,7 @@ plugins {
 
 kotlin {
     androidLibrary {
-        namespace = "com.lordnikius.nstretching.shared"
+        namespace = "com.diagorus.nstretching.shared"
         compileSdk = 36
         minSdk = 24
 
@@ -119,9 +119,9 @@ tasks.matching { it.name.startsWith("ksp") && it.name != "kspCommonMainKotlinMet
 }
 
 compose.resources {
-    packageOfResClass = "com.lordnikius.nstretching.shared.generated.resources"
+    packageOfResClass = "com.diagorus.nstretching.shared.generated.resources"
 }
 
 ksp {
-    arg("KOIN_CONFIG_CHECK","true")
+    arg("KOIN_CONFIG_CHECK", "true")
 }
