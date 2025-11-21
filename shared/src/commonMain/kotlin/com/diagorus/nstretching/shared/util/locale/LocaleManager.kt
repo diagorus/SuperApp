@@ -2,9 +2,9 @@ package com.diagorus.nstretching.shared.util.locale
 
 expect class LocaleManager {
 
-    val supportedLocales: List<SupportedLocale>
+    val supportedLocales: List<LocaleWithName>
 
-    fun getCurrentLocale(): SupportedLocale
+    fun getCurrentLocale(): LocaleWithName
 
-    fun setLocale(locale: SupportedLocale)
+    fun setLocale(locale: LocaleWithName)
 }

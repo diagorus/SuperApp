@@ -4,7 +4,7 @@ import android.speech.tts.TextToSpeech
 import com.diagorus.nstretching.shared.util.preferences.PreferencesDataStoreManager
 import com.diagorus.nstretching.shared.util.koin.CoroutinesModule.ApplicationScope
 import com.diagorus.nstretching.shared.util.locale.StringUiData
-import com.diagorus.nstretching.shared.util.locale.SupportedLocale
+import com.diagorus.nstretching.shared.util.locale.LocaleWithName
 import com.diagorus.nstretching.shared.util.locale.transformToString
 import com.diagorus.nstretching.shared.util.textToSpeech.auxiliaries.TextToSpeechInitializationManager
 import com.diagorus.nstretching.shared.util.textToSpeech.auxiliaries.UtteranceManager
@@ -24,9 +24,9 @@ actual class TextToSpeechManager(
     private val utteranceManager: UtteranceManager,
 ) {
 
-    actual suspend fun isLanguageAvailable(locale: SupportedLocale): Boolean {
+    actual suspend fun isLanguageAvailable(locale: LocaleWithName): Boolean {
         val textToSpeech = textToSpeechInitializationManager.getInstance()
-        val languageStatus = textToSpeech.isLanguageAvailable(Locale(locale.languageTag))
+        val languageStatus = textToSpeech.isLanguageAvailable(Locale(locale.supportedLocale.tag))
         return languageStatus != TextToSpeech.LANG_MISSING_DATA &&
                 languageStatus != TextToSpeech.LANG_NOT_SUPPORTED
     }

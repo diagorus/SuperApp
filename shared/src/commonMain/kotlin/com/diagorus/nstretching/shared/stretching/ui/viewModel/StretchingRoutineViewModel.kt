@@ -1,7 +1,7 @@
 package com.diagorus.nstretching.shared.stretching.ui.viewModel
 
 import androidx.lifecycle.viewModelScope
-import com.diagorus.nstretching.shared.stretching.SupportedLocaleWithTextToSpeechAvailability
+import com.diagorus.nstretching.shared.stretching.LocaleWithTextToSpeechAvailability
 import com.diagorus.nstretching.shared.stretching.data.routine.StretchingRoutineRepository
 import com.diagorus.nstretching.shared.stretching.data.routine.exercise.step.elements.StepAction
 import com.diagorus.nstretching.shared.util.audio.BeepToneManager
@@ -42,11 +42,12 @@ class StretchingRoutineViewModel(
             val supportedLocales = localeManager.supportedLocales
             val supportedLocalesWithTextToSpeechAvailability = supportedLocales.map {
                 val isTextToSpeechAvailable = textToSpeechManager.isLanguageAvailable(it)
-                SupportedLocaleWithTextToSpeechAvailability(it, isTextToSpeechAvailable)
+                LocaleWithTextToSpeechAvailability(it, isTextToSpeechAvailable)
             }
+
             val currentLocale = localeManager.getCurrentLocale()
             val currentLocaleWithTextToSpeechAvailability =
-                supportedLocalesWithTextToSpeechAvailability.firstOrNull { it.supportedLocale == currentLocale }
+                supportedLocalesWithTextToSpeechAvailability.firstOrNull { it.localeWithName == currentLocale }
             updateUiState {
                 copy(
                     supportedLocales = supportedLocalesWithTextToSpeechAvailability,
@@ -70,7 +71,8 @@ class StretchingRoutineViewModel(
     }
 
     fun onStartPauseClick() {
-        if (uiState.value.currentLocale?.isTextToSpeechAvailable == true) {
+        val isTextToSpeechAvailable = uiState.value.currentLocale?.isTextToSpeechAvailable == true
+        if (isTextToSpeechAvailable) {
             startOrPause()
         } else {
             updateUiState {
@@ -169,8 +171,8 @@ class StretchingRoutineViewModel(
         }
     }
 
-    fun onLanguageClick(supportedLocaleWithTextToSpeechAvailability: SupportedLocaleWithTextToSpeechAvailability) {
-        localeManager.setLocale(supportedLocaleWithTextToSpeechAvailability.supportedLocale)
+    fun onLanguageClick(localeWithTextToSpeechAvailability: LocaleWithTextToSpeechAvailability) {
+        localeManager.setLocale(localeWithTextToSpeechAvailability.localeWithName)
         fetchLocaleAvailability()
         fetchTextToSpeechEngines()
     }

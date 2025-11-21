@@ -2,39 +2,36 @@ package com.diagorus.nstretching.shared.util.locale
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
+import com.diagorus.nstretching.shared.util.environment.customAppLocale
 import java.util.Locale
 
 actual class LocaleManager(
     private val context: Context,
 ) {
 
-    actual val supportedLocales: List<SupportedLocale> by lazy {
-        listOf(
-            "en",
-            "de",
-            "uk",
-            "ru",
-        )
+    actual val supportedLocales: List<LocaleWithName> by lazy {
+        SupportedLocale.entries
             .map {
-                languageTagToSupportedLocale(it)
+                languageTagToSupportedLocale(it.tag)
             }
     }
 
-    private fun languageTagToSupportedLocale(languageTag: String): SupportedLocale {
+    private fun languageTagToSupportedLocale(languageTag: String): LocaleWithName {
         val locale = Locale.forLanguageTag(languageTag)
-        return locale.toSupportedLocale()
+        return locale.toSupportedLocaleWithName()
     }
 
-    private fun Locale.toSupportedLocale(): SupportedLocale {
+    private fun Locale.toSupportedLocaleWithName(): LocaleWithName {
         val displayName = getDisplayLanguage(this).capitalize(this)
-        return SupportedLocale(
-            languageTag = language,
-            displayName = displayName,
+        val displayNameUiData = StringUiData.Value(displayName)
+        val supportedLocale = SupportedLocale.fromLanguageTag(language)
+        return LocaleWithName(
+            supportedLocale = supportedLocale,
+            displayName = displayNameUiData,
         )
     }
 
-    actual fun getCurrentLocale(): SupportedLocale {
+    actual fun getCurrentLocale(): LocaleWithName {
         val chosenLocale = AppCompatDelegate.getApplicationLocales()
             .toLanguageTags()
             .split(',')
@@ -45,14 +42,16 @@ actual class LocaleManager(
         return chosenLocale ?: getDefaultDeviceLocale()
     }
 
-    private fun getDefaultDeviceLocale(): SupportedLocale {
+    private fun getDefaultDeviceLocale(): LocaleWithName {
         val defaultLocale = context.resources.configuration.locales[0]
-        return defaultLocale.toSupportedLocale()
+        return defaultLocale.toSupportedLocaleWithName()
     }
 
-    actual fun setLocale(locale: SupportedLocale) {
-        AppCompatDelegate.setApplicationLocales(
-            LocaleListCompat.forLanguageTags(locale.languageTag)
-        )
+    actual fun setLocale(locale: LocaleWithName) {
+        customAppLocale = locale.supportedLocale.tag
+    }
+
+    fun onLocaleChanged() {
+        customAppLocale = getCurrentLocale().supportedLocale.tag
     }
 }

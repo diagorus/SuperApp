@@ -1,4 +1,4 @@
-package com.diagorus.nstretching.shared
+package com.diagorus.nstretching.shared.util.environment
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -13,13 +13,15 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun App() {
     MaterialTheme {
-        NavHost(
-            navController = rememberNavController(),
-            startDestination = StretchingRoutineRoute,
-        ) {
-            composable<StretchingRoutineRoute> {
-                val viewModel = koinViewModel<StretchingRoutineViewModel>()
-                StretchingRoutineScreen(viewModel)
+        AppEnvironment {
+            NavHost(
+                navController = rememberNavController(),
+                startDestination = StretchingRoutineRoute,
+            ) {
+                composable<StretchingRoutineRoute> {
+                    val viewModel = koinViewModel<StretchingRoutineViewModel>()
+                    StretchingRoutineScreen(viewModel)
+                }
             }
         }
     }

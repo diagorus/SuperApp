@@ -3,10 +3,11 @@ package com.diagorus.nstretching.shared.stretching.ui
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.diagorus.nstretching.shared.stretching.SupportedLocaleWithTextToSpeechAvailability
+import com.diagorus.nstretching.shared.stretching.LocaleWithTextToSpeechAvailability
 import com.diagorus.nstretching.shared.stretching.ui.viewModel.StretchingRoutineUiState
 import com.diagorus.nstretching.shared.util.locale.StringUiData
 import com.diagorus.nstretching.shared.util.locale.SupportedLocale
+import com.diagorus.nstretching.shared.util.locale.LocaleWithName
 
 @Preview
 @Composable
@@ -15,17 +16,17 @@ private fun StretchingRoutineScreenPreview0() {
         StretchingRoutineScreen(
             StretchingRoutineUiState(
                 supportedLocales = listOf(
-                    SupportedLocaleWithTextToSpeechAvailability(
-                        supportedLocale = SupportedLocale("en", "English"),
+                    LocaleWithTextToSpeechAvailability(
+                        localeWithName = LocaleWithName.default,
                         isTextToSpeechAvailable = true,
                     ),
-                    SupportedLocaleWithTextToSpeechAvailability(
-                        supportedLocale = SupportedLocale("pl", "Polski"),
+                    LocaleWithTextToSpeechAvailability(
+                        localeWithName = LocaleWithName(SupportedLocale.GERMAN, StringUiData.Value("English")),
                         isTextToSpeechAvailable = false,
                     ),
                 ),
-                currentLocale = SupportedLocaleWithTextToSpeechAvailability(
-                    supportedLocale = SupportedLocale("en", "English"),
+                currentLocale = LocaleWithTextToSpeechAvailability(
+                    localeWithName = LocaleWithName.default,
                     isTextToSpeechAvailable = true,
                 ),
                 exercise = StringUiData.Value("Hands"),

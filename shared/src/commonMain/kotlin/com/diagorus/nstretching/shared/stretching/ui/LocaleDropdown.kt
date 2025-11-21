@@ -15,20 +15,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.diagorus.nstretching.shared.stretching.SupportedLocaleWithTextToSpeechAvailability
+import com.diagorus.nstretching.shared.stretching.LocaleWithTextToSpeechAvailability
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import com.diagorus.nstretching.shared.generated.resources.Res
 import com.diagorus.nstretching.shared.generated.resources.ic_speaker
 import com.diagorus.nstretching.shared.generated.resources.language
+import com.diagorus.nstretching.shared.util.locale.transformToStringCompose
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LocaleDropdown(
     modifier: Modifier,
-    currentLocale: SupportedLocaleWithTextToSpeechAvailability,
-    locales: List<SupportedLocaleWithTextToSpeechAvailability>,
-    onLanguageClick: (SupportedLocaleWithTextToSpeechAvailability) -> Unit,
+    currentLocale: LocaleWithTextToSpeechAvailability,
+    locales: List<LocaleWithTextToSpeechAvailability>,
+    onLanguageClick: (LocaleWithTextToSpeechAvailability) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
     ExposedDropdownMenuBox(
@@ -46,7 +47,7 @@ fun LocaleDropdown(
             label = {
                 Text(stringResource(Res.string.language))
             },
-            value = currentLocale.supportedLocale.displayName,
+            value = currentLocale.localeWithName.displayName.transformToStringCompose(),
             onValueChange = { },
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(
@@ -73,7 +74,7 @@ fun LocaleDropdown(
                 }
                 DropdownMenuItem(
                     text = {
-                        Text(locale.supportedLocale.displayName)
+                        Text(locale.localeWithName.displayName.transformToStringCompose())
                     },
                     trailingIcon = trailingIcon,
                     onClick = {

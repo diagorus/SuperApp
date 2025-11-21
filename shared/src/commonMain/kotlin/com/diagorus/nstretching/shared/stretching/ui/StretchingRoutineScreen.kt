@@ -13,11 +13,16 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import co.touchlab.kermit.Logger
+import com.diagorus.nstretching.shared.util.environment.LocalAppLocale
+import com.diagorus.nstretching.shared.util.environment.customAppLocale
 import com.diagorus.nstretching.shared.stretching.ui.viewModel.StretchingRoutineState
 import com.diagorus.nstretching.shared.stretching.ui.viewModel.StretchingRoutineUiState
 import com.diagorus.nstretching.shared.stretching.ui.viewModel.StretchingRoutineViewModel
@@ -143,7 +148,9 @@ fun StretchingRoutineScreen(
                             .padding(top = 16.dp, start = 16.dp, end = 16.dp),
                         currentLocale = currentLocale,
                         locales = locales,
-                        onLanguageClick = callbacks.onLanguageClick,
+                        onLanguageClick = {
+                            callbacks.onLanguageClick(it)
+                        },
                     )
                 }
 

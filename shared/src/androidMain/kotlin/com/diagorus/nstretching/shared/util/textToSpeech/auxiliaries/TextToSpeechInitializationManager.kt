@@ -41,7 +41,7 @@ class TextToSpeechInitializationManager(
                     { status ->
                         if (status == TextToSpeech.SUCCESS) {
                             val currentLocale = localeManager.getCurrentLocale()
-                            val languageStatus = self.setLanguage(Locale(currentLocale.languageTag))
+                            val languageStatus = self.setLanguage(Locale(currentLocale.supportedLocale.tag))
                             when (languageStatus) {
                                 TextToSpeech.LANG_AVAILABLE,
                                 TextToSpeech.LANG_COUNTRY_AVAILABLE,

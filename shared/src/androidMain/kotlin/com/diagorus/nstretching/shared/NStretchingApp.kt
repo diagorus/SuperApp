@@ -6,7 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.core.content.ContextCompat
+import co.touchlab.kermit.Logger
 import com.diagorus.nstretching.shared.util.koin.initKoin
+import com.diagorus.nstretching.shared.util.locale.LocaleManager
 import com.diagorus.nstretching.shared.util.textToSpeech.TextToSpeechManager
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
@@ -15,6 +17,7 @@ import org.koin.android.ext.koin.androidLogger
 class NStretchingApp : Application() {
 
     private val textToSpeechManager by inject<TextToSpeechManager>()
+    private val localeManager by inject<LocaleManager>()
 
     override fun onCreate() {
         super.onCreate()
@@ -28,6 +31,7 @@ class NStretchingApp : Application() {
             override fun onReceive(context: Context?, intent: Intent) {
                 if (intent.action == Intent.ACTION_LOCALE_CHANGED) {
                     textToSpeechManager.onLanguageChanged()
+                    localeManager.onLocaleChanged()
                 }
             }
         }
